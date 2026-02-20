@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+
+<div style="padding:20px">
+  <h2>Bank Transactions</h2>
+
+  <p *ngIf="loading">Loading transactions...</p>
+
+  <div style="margin-bottom: 16px;">
+    <label for="pageSize">Page Size: </label>
+    <select id="pageSize" [(ngModel)]="pageSize" (change)="onPageSizeChange($event)">
+      <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+    </select>
+  </div>
+  
+
+  <table width="100%" *ngIf="!loading">
+    <thead>
+      <tr>
+        <!-- <th>ID</th> -->
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Account Number</th>
+        <!-- <th>Account ID</th> -->
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of txns">
+        <!-- <td>{{ t.id }}</td> -->
+        <td>{{ t.amount }}</td>
+        <td>{{ t.type }}</td>
+        <td>{{ t.accountNumber }}</td>
+        <!-- <td>{{ t.accountId }}</td> -->
+        <td>{{ t.timestamp }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:15px">
+    
+    <button (click)="prevPage()">Previous</button>
+    <span> Page {{ page + 1 }} </span>
+    <button (click)="nextPage()">Next</button>
+  </div>
+</div>

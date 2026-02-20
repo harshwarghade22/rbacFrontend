@@ -1,0 +1,70 @@
+<style>
+    .export-btn {
+        padding: 10px 18px;
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .export-btn:hover {
+        background-color: #1b5e20;
+    }
+
+    .export-btn:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
+</style>
+<app-navbar></app-navbar>
+
+
+<div style="padding: 20px">
+    <h2>Account Transactions 📊</h2>
+
+
+    <p><strong>Account ID:</strong> {{ accountId }}</p>
+
+    <button (click)="exportExcel()" [disabled]="exporting" class="export-btn">
+        {{ exporting ? 'Exporting...' : 'Export Excel 📥' }}
+    </button>
+
+    <div style="margin-bottom: 16px;">
+        <label for="pageSize">Page Size: </label>
+        <select id="pageSize" [(ngModel)]="pageSize" (change)="onPageSizeChange($event)">
+            <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+        </select>
+    </div>
+
+    <p *ngIf="loading">Loading transactions...</p>
+
+    <table border="1" width="100%" *ngIf="!loading && transactions.length > 0">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Timestamp</th>
+                <th>Account Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tx of transactions">
+                <td>₹{{ tx.amount }}</td>
+                <td>{{ tx.type }}</td>
+                <td>{{ tx.timestamp }}</td>
+                <td>{{ tx.accountNumber }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination-controls" *ngIf="totalPages > 1">
+        <button (click)="prevPage()" [disabled]="page === 0">Previous</button>
+        <span> Page {{ page + 1 }} of {{ totalPages }} </span>
+        <button (click)="nextPage()" [disabled]="page >= totalPages - 1">Next</button>
+
+        <div *ngIf="!loading && transactions.length === 0">
+            No transactions found for this account.
+        </div>
+    </div>

@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+
+<div style="padding:20px; max-width:500px">
+  <h2>Create New User / Admin 👑</h2>
+
+  <form (ngSubmit)="createUser()">
+
+    <label>Name</label>
+    <input type="text" [(ngModel)]="name" name="name" required />
+
+    <label>Email</label>
+    <input type="email" [(ngModel)]="email" name="email" required />
+
+    <label>Password</label>
+    <input type="password" [(ngModel)]="password" name="password" required />
+
+    <!-- 🔥 ADMIN ROLE CONTROL -->
+    <label>Select Role</label>
+    <select [(ngModel)]="role" name="role">
+      <option value="ROLE_USER">User</option>
+      <option value="ROLE_ADMIN">Admin</option>
+    </select>
+
+    <button type="submit" [disabled]="loading" class="create-btn">
+      {{ loading ? 'Creating...' : 'Create User/Admin' }}
+    </button>
+
+  </form>
+</div>
+
+<style>
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0 16px 0;
+}
+
+.create-btn {
+  padding: 12px;
+  width: 100%;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.create-btn:hover {
+  background-color: #1b5e20;
+}
+</style>

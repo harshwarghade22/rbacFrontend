@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+
+<div class="dashboard-wrapper">
+  <div class="dashboard-container">
+    <!-- Header Section -->
+    <div class="header-section">
+      <h1 class="page-title">User Dashboard</h1>
+      <p class="welcome-message">Welcome back to your AMS Portal</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-section">
+      <!-- Cards Container -->
+      <div class="cards-grid">
+        <!-- My Accounts Card -->
+        <div class="card" (click)="goToAccounts()">
+          <div class="card-icon">🏦</div>
+          <h2 class="card-title">My Accounts</h2>
+          <p class="card-description">View and manage all your bank accounts</p>
+          <button class="card-button">Explore Accounts</button>
+        </div>
+
+        <!-- Transactions Card -->
+        <div class="card" (click)="goToTransactions()">
+          <div class="card-icon">📊</div>
+          <h2 class="card-title">Transactions</h2>
+          <p class="card-description">Review your recent transaction history</p>
+          <button class="card-button">View Transactions</button>
+        </div>
+      </div>
+
+      <!-- Quick Stats Section -->
+      <div class="stats-section">
+        <h2 class="section-title">Quick Overview</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-icon">💰</span>
+            <p class="stat-label">Total Accounts</p>
+            <p class="stat-value">-</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">💸</span>
+            <p class="stat-label">Recent Transactions</p>
+            <p class="stat-value">-</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">🔐</span>
+            <p class="stat-label">Account Status</p>
+            <p class="stat-value">Active</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

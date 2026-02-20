@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+
+<div class="dashboard-wrapper">
+  <div class="dashboard-container">
+    <!-- Header Section -->
+    <div class="header-section">
+      <h1 class="page-title">Admin Dashboard</h1>
+      <p class="welcome-message">Manage users, accounts, and system settings</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-section">
+      <!-- Administration Cards -->
+      <div class="cards-grid">
+        <!-- Create User/Admin Card -->
+        <div class="card primary" (click)="createUser()">
+          <div class="card-icon">➕</div>
+          <h2 class="card-title">Create User/Admin</h2>
+          <p class="card-description">Add a new user or administrator to the system</p>
+          <button class="card-button">Create Account</button>
+        </div>
+
+        <!-- Manage Users Card -->
+        <div class="card" (click)="manageUsers()">
+          <div class="card-icon">👥</div>
+          <h2 class="card-title">Manage Users</h2>
+          <p class="card-description">View, edit, or delete user accounts</p>
+          <button class="card-button">Manage Users</button>
+        </div>
+
+        <!-- View Transactions Card -->
+        <div class="card" (click)="goToTransactions()">
+          <div class="card-icon">📊</div>
+          <h2 class="card-title">System Transactions</h2>
+          <p class="card-description">Monitor all transaction activity in the system</p>
+          <button class="card-button">View Transactions</button>
+        </div>
+      </div>
+
+      <!-- Admin Stats Section -->
+      <div class="stats-section">
+        <h2 class="section-title">System Overview</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-icon">👤</span>
+            <p class="stat-label">Total Users</p>
+            <p class="stat-value">-</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">🏦</span>
+            <p class="stat-label">Active Accounts</p>
+            <p class="stat-value">-</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">⚙️</span>
+            <p class="stat-label">System Status</p>
+            <p class="stat-value">Active</p>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">📈</span>
+            <p class="stat-label">Recent Activity</p>
+            <p class="stat-value">-</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

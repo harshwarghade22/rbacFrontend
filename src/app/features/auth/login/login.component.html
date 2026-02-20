@@ -1,0 +1,54 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <div class="login-header">
+      <div class="logo">🏦</div>
+      <h1>AMS Portal</h1>
+      <p class="subtitle">Account Management System</p>
+    </div>
+
+    <form (ngSubmit)="onLogin()" class="login-form">
+      <div class="form-group">
+        <label for="email" class="form-label">
+          <span class="icon">📧</span> Email Address
+        </label>
+        <input 
+          id="email"
+          type="email" 
+          [(ngModel)]="email" 
+          name="email" 
+          class="form-input"
+          placeholder="Enter your email"
+          required 
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">
+          <span class="icon">🔐</span> Password
+        </label>
+        <input 
+          id="password"
+          type="password" 
+          [(ngModel)]="password" 
+          name="password" 
+          class="form-input"
+          placeholder="Enter your password"
+          required 
+        />
+      </div>
+
+      <div *ngIf="error" class="error-message">
+        <span class="error-icon">⚠️</span> {{ error }}
+      </div>
+
+      <button type="submit" [disabled]="loading" class="submit-button">
+        <span *ngIf="!loading">Sign In</span>
+        <span *ngIf="loading" class="loading-spinner">⏳ Logging in...</span>
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <p>Don't have an account? <a href="register">Register here</a></p>
+    </div>
+  </div>
+</div>

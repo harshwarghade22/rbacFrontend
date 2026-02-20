@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<div style="padding: 20px">
+    <h2>Admin - Users Management 👥</h2>
+
+    <p *ngIf="loading">Loading users...</p>
+
+    <table border="1" width="100%" *ngIf="!loading && users.length > 0" class="users-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name || 'N/A' }}</td>
+                <td>{{ user.email || 'N/A' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="!loading && users.length === 0">
+        No users found.
+    </div>
+</div>
+
+<style>
+    .users-table {
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    .users-table th {
+        background-color: #1976d2;
+        color: white;
+        padding: 10px;
+    }
+
+    .users-table td {
+        padding: 10px;
+        text-align: center;
+    }
+</style>
