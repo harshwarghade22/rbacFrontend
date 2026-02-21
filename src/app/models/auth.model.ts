@@ -6,6 +6,7 @@ export interface LoginRequest {
 export interface AuthResponse {
   token: string;
   roles: string[];
+  name: string; // Add name to response for navbar display
 }
 
 

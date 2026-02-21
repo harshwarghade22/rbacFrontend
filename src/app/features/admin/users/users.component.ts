@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { AdminUserService } from '../../../services/admin-user.service';
 import { User } from '../../../models/user.model';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
@@ -7,8 +8,9 @@ import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 @Component({
   selector: 'app-admin-users',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
-  templateUrl: './users.component.html'
+  imports: [CommonModule, NavbarComponent, FormsModule],
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.scss'
 })
 export class AdminUsersComponent implements OnInit {
 
@@ -16,6 +18,19 @@ export class AdminUsersComponent implements OnInit {
 
   users: User[] = [];
   loading = false;
+  searchQuery = '';
+
+  get filteredUsers(): User[] {
+    if (!this.searchQuery.trim()) {
+      return this.users;
+    }
+    
+    const query = this.searchQuery.toLowerCase();
+    return this.users.filter(user => 
+      (user.name && user.name.toLowerCase().includes(query)) ||
+      (user.email && user.email.toLowerCase().includes(query))
+    );
+  }
 
   ngOnInit(): void {
     this.loadUsers();
@@ -36,4 +51,5 @@ export class AdminUsersComponent implements OnInit {
       }
     });
   }
+
 }

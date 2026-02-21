@@ -17,6 +17,7 @@ export class AuthService {
         tap(res => {
           localStorage.setItem('token', res.token);
           localStorage.setItem('roles', JSON.stringify(res.roles));
+          localStorage.setItem('name', res.name); // Store name for navbar display
         })
       );
   }
@@ -44,6 +45,11 @@ export class AuthService {
     } catch {
       return null;
     }
+  }
+
+  getName(): string | null {
+    const name = localStorage.getItem('name');
+    return name ? name : null;
   }
 
   isAdmin(): boolean {

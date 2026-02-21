@@ -15,8 +15,8 @@ export class NavbarComponent implements OnInit {
   private router = inject(Router);
 
   role = '';
-  userName = 'John Doe'; // Replace with actual user data from AuthService
-  dropdownOpen = false;
+  userName = this.authService.getName() || 'User'; // Replace with actual user data from AuthService
+  dropdownOpen = false;   
 
   ngOnInit(): void {
     this.role = this.authService.getUserRole() || 'user';
