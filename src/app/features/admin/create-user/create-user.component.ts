@@ -9,7 +9,8 @@ import { NavbarComponent } from '../../../shared/navbar/navbar.component';
   selector: 'app-create-user',
   standalone: true,
   imports: [CommonModule, FormsModule, NavbarComponent],
-  templateUrl: './create-user.component.html'
+  templateUrl: './create-user.component.html',
+  styleUrl: './create-user.component.scss'
 })
 export class CreateUserComponent {
 
@@ -18,12 +19,27 @@ export class CreateUserComponent {
   password = '';
   role = 'ROLE_USER';
   loading = false;
+  successMessage = '';
+  errorMessage = '';
+  nameFocused = false;
+  emailFocused = false;
+  passwordFocused = false;
+  showPassword = false;
 
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  getPasswordStrength(): string {
+    const password = this.password;
+    if (password.length < 6) return 'weak';
+    if (password.length < 12 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) return 'medium';
+    return 'strong';
+  }
+
   createUser() {
     this.loading = true;
+    this.successMessage = '';
+    this.errorMessage = '';
 
     const payload = {
       name: this.name,
@@ -35,13 +51,19 @@ export class CreateUserComponent {
     this.authService.register(payload).subscribe({
       next: () => {
         this.loading = false;
-        alert('User/Admin created successfully');
-        this.router.navigate(['/admin/dashboard']);
+        this.successMessage = 'User/Admin created successfully';
+        this.name = '';
+        this.email = '';
+        this.password = '';
+        this.role = 'ROLE_USER';
+        setTimeout(() => {
+          this.router.navigate(['/admin/dashboard']);
+        }, 1500);
       },
       error: (err) => {
         console.error(err);
         this.loading = false;
-        alert(err.error?.message || 'Creation failed');
+        this.errorMessage = err.error?.message || 'Creation failed';
       }
     });
   }

@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
   selector: 'app-accounts',
   standalone: true,
   imports: [CommonModule, NavbarComponent],
-  templateUrl: './accounts.component.html'
+  templateUrl: './accounts.component.html',
+  styleUrl: './accounts.component.scss'
 })
 export class AccountsComponent implements OnInit {
 

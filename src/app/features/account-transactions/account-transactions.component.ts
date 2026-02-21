@@ -10,7 +10,8 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
   selector: 'app-account-transactions',
   standalone: true,
   imports: [CommonModule, FormsModule, NavbarComponent],
-  templateUrl: './account-transactions.component.html'
+  templateUrl: './account-transactions.component.html',
+  styleUrl: './account-transactions.component.scss'
 })
 export class AccountTransactionsComponent implements OnInit {
 
@@ -55,6 +56,37 @@ export class AccountTransactionsComponent implements OnInit {
       this.page++;
       this.loadTransactions();
     }
+  }
+
+  goToFirst(): void {
+    this.page = 0;
+    this.loadTransactions();
+  }
+
+  goToLast(): void {
+    this.page = this.totalPages - 1;
+    this.loadTransactions();
+  }
+
+  goToPage(p: number): void {
+    this.page = p;
+    this.loadTransactions();
+  }
+
+  getPageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxVisible = 5;
+    let start = Math.max(0, this.page - Math.floor(maxVisible / 2));
+    let end = Math.min(this.totalPages, start + maxVisible);
+
+    if (end - start < maxVisible) {
+      start = Math.max(0, end - maxVisible);
+    }
+
+    for (let i = start; i < end; i++) {
+      pages.push(i);
+    }
+    return pages;
   }
 
   prevPage() {
